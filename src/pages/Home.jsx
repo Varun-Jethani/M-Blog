@@ -50,7 +50,12 @@ function Home() {
 export default Home
 
 export const homeloader = async () => {
+    try{
     const response = await appwriteService.getPosts()
     const posts = response.documents
     return posts
+    }catch(e){
+        console.log(e)
+        return []
+    }
 }
