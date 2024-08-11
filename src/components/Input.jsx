@@ -12,7 +12,7 @@ const Input = React.forwardRef(function ({
     const id = useId()
     
     return (
-        <div className='flex w-full h-12 items-center'>
+        <div className='flex w-full h-12 justify-center items-center'>
             {label && <label
                 className='inline-block pl-1 h-1/2 mx-3 transform -translate-y-1/2'
                 htmlFor={id}>

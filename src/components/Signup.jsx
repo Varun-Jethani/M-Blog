@@ -37,7 +37,7 @@ function Signup() {
         <div className='flex items-center justify-center'>
             <div className={`mx-auto w-full max-w-lg
                 p-10 border border-black/10 
-                h-full bg-white rounded-3xl shadow-[0_0_10px_rgba(0,0,0,0.1)]`}>
+                h-full bg-[#F7FFF7] rounded-3xl shadow-[0_0_10px_rgba(0,0,0,0.1)]`}>
                     <div className='mb-2 flex justify-center '>
                         
                             <Logo />

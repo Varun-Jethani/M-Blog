@@ -37,7 +37,7 @@ function Login() {
 
     return (
         <div className='flex items-center justify-center w-full'>
-            <div className={`mx-3 sm:mx-auto w-full max-w-lg bg-white rounded-xl
+            <div className={`mx-3 sm:mx-auto w-full max-w-lg bg-[#F7FFF7]  rounded-xl shadow-[0_0_10px_rgba(0,0,0,0.1)]
                 p-10 border border-black/10`}>
 
                     <div className='mb-2 w-full flex justify-center items-center' >
@@ -58,10 +58,10 @@ function Login() {
                     </p>
                     
                     {error && <p className='text-red-600 mt-8 text-center'>{error}</p>}
-                    <form onSubmit={handleSubmit(login)} className='mt-8 flex flex-col items-center'>
-                        <div className='space-y-8 mx-2'>
+                    <form onSubmit={handleSubmit(login)} className='mt-8 flex flex-col'>
+                        <div className='space-y-8 mx-4'>
                             <Input
-                            
+                            className='placeholder-gray-950'
                             placeholder='Enter your email'
                             children={<MdEmail className='h-1/2 w-1/6  right-4 text-black text-base'/>}
 
@@ -75,7 +75,7 @@ function Login() {
                                 })}
                             />
                             <Input
-                            
+                            className='placeholder-gray-950'
                             type='password'
                             placeholder='Enter your password'
                             children={<FaLock className='h-1/2 w-1/6  right-4 text-black text-base'/>}

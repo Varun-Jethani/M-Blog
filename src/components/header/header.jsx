@@ -50,7 +50,7 @@ function Header() {
     };
 
     return (
-      <header className='py-3 shadow bg-gray-500'>
+      <header className='py-3 shadow bg-[#1A535C]'>
       <Container>
         <nav className='flex flex-wrap items-center justify-between'>
         <div className='mr-4'>
@@ -62,7 +62,7 @@ function Header() {
         <label htmlFor='menu-toggle' onClick ={handleNavToggle} className='block cursor-pointer lg:hidden mr-5'>
           {isNavOpen ? (
             <svg 
-            className='w-6 h-6 text-gray-900' 
+            className='w-6 h-6 text-[#F7FFF7]' 
             fill='none' 
             stroke='currentColor' 
             viewBox='0 0 24 24' 
@@ -75,7 +75,7 @@ function Header() {
             </path>   
             </svg>) :(
           <svg
-          className='w-6 h-6 text-gray-900'
+          className='w-6 h-6 text-[#F7FFF7]'
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -89,13 +89,13 @@ function Header() {
           ></path>
           </svg>)}
         </label>}
-        <ul className='hidden lg:flex ml-auto'>
+        <ul className='hidden lg:flex ml-auto space-x-3 text-[#F7FFF7]'>
             {navItems.map((item) => 
             item.active ? (
               <li key={item.name}>
                 <button
                 onClick={() => navigate(item.slug)}
-                className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 hover:text-black hover:font-bold rounded-full'
                 >{item.name}</button>
               </li>
             ) : null
