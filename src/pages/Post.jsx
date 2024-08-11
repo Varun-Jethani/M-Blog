@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 
 export default function Post() {
-    const [post, setPost] = useState(null);
-    const { slug } = useParams();
+    // const [post, setPost] = useState(null);
+    // const { slug } = useParams();
     const navigate = useNavigate();
+    const post = useLoaderData();
 
     const userData = useSelector((state) => state.auth.userData);
+    let isAuthor = false;
+    try{
+        isAuthor = post && userData ? (post.userid === userData.$id || post.userid === userData.userData.$id): false;
+    }catch(e){
+        console.log(e)
+    }
+   
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
-
-    useEffect(() => {
-        if (slug) {
-            appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
-            });
-        } else navigate("/");
-    }, [slug, navigate]);
+    // useEffect(() => {    
+    //     if (slug) {
+    //         appwriteService.getPost(slug).then((post) => {
+    //             if (post) setPost(post);
+    //             else navigate("/");
+    //         });
+    //     } else navigate("/");
+    // }, [slug, navigate]);
 
     const deletePost = () => {
         appwriteService.deletePost(post.$id).then((status) => {
@@ -64,4 +70,10 @@ export default function Post() {
             </Container>
         </div>
     ) : null;
+}
+
+export const postInfoLoader = async ({params}) => {
+    const { slug } = params;    
+    const post = await appwriteService.getPost(slug);
+    return post;
 }

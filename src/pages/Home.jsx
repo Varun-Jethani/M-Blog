@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Container, PostCard } from '../components'
 import appwriteService from '../appwrite/config'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
+import { Query } from 'appwrite'
 
 function Home() {
-    const [posts, setPosts] = useState([])
-    useEffect(() => {
-        appwriteService.getPosts([]).then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-            }
-        })
-    },[])
+    // const [posts, setPosts] = useState([])
+    // useEffect(() => {
+    //     appwriteService.getPosts([]).then((posts) => {
+    //         if (posts) {
+    //             setPosts(posts.documents)
+    //         }
+    //     })
+    // },[])
+    const posts = useLoaderData();
 
     if (posts.length === 0) {
         return (
@@ -46,3 +48,9 @@ function Home() {
 }
 
 export default Home
+
+export const homeloader = async () => {
+    const response = await appwriteService.getPosts()
+    const posts = response.documents
+    return posts
+}

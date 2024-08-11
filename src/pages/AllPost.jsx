@@ -2,17 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Container, PostCard } from '../components'
 import appwriteService from '../appwrite/config'
 import { set } from 'react-hook-form'
+import { useLoaderData } from 'react-router-dom'
+import { Query } from 'appwrite'
+
 
 
 function AllPost() {
-    const [posts, setPosts] = useState([])
-    useEffect(() => {
-        appwriteService.getPosts([]).then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-            }
-        })
-    },[])
+    // const [posts, setPosts] = useState([])
+
+    const posts = useLoaderData()
+
+
+    // useEffect(() => {
+    //     appwriteService.getPosts([]).then((posts) => {
+    //         if (posts) {
+    //             setPosts(posts.documents)
+    //         }
+    //     })
+    // },[])
     
 
     return (
@@ -32,3 +39,10 @@ function AllPost() {
 }
 
 export default AllPost
+
+export const postsloader = async ({params}) => {
+    const {userid} = params; 
+    const response = await appwriteService.getPosts([Query.equal('userid', userid )])
+    const posts = response.documents
+    return posts
+}

@@ -5,12 +5,12 @@ import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './pages/Home.jsx'
+import Home, { homeloader } from './pages/Home.jsx'
 import { AuthLayout } from './components/index.js'
-import AllPost from './pages/AllPost.jsx'
+import AllPost, { postsloader } from './pages/AllPost.jsx'
 import AddPost from './pages/AddPost.jsx'
 import EditPost from './pages/EditPost.jsx'
-import Post from './pages/Post.jsx'
+import Post,{ postInfoLoader} from './pages/Post.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        loader: homeloader,
         path: '/',
         element: <Home />,
       },
@@ -37,7 +38,8 @@ const router = createBrowserRouter([
           </AuthLayout>)
       },
       {
-        path: '/posts',
+        loader:postsloader,
+        path: '/posts/:userid',
         element: (<AuthLayout authentication>
           <AllPost />
           </AuthLayout>)
@@ -49,6 +51,7 @@ const router = createBrowserRouter([
           </AuthLayout>)
       },
       {
+        loader: postInfoLoader,
         path: '/edit-post/:slug',
         element: (<AuthLayout authentication>
           {" "}
@@ -56,6 +59,7 @@ const router = createBrowserRouter([
           </AuthLayout>)
       },
       {
+        loader: postInfoLoader,
         path: "/post/:slug",
         element: <Post />,
       }
