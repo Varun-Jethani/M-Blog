@@ -71,8 +71,8 @@ function PostForm({post}) {
     },[watch,slugify,setValue])
 
     return (
-        <form onSubmit={handleSubmit(submit)} className='flex  mt-3'>
-            <div className='w-full sm:w-2/3 px-2 space-y-3'>
+        <form onSubmit={handleSubmit(submit)} className='flex flex-col md:flex-row mt-3'>
+            <div className='w-full md:w-2/3 px-2 space-y-3'>
                 <Input
                     label='Title'
                     placeholder='Enter post title '
@@ -94,7 +94,7 @@ function PostForm({post}) {
                     control={control} defaultValue={getValues('content')}
                 />
             </div>
-            <div className='w-full mt-8 space-y-2 sm:space-y-auto sm:mt-0 sm:w-1/3 px-2 '>
+            <div className='w-full mt-8 space-y-2 md:space-y-auto md:mt-0 md:w-1/3 px-2 '>
                 <Input
                     label='Featured Image'
                     type='file'
