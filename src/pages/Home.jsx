@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, PostCard } from '../components'
 import appwriteService from '../appwrite/config'
 import { Link, useLoaderData } from 'react-router-dom'
-import { Query } from 'appwrite'
+
 
 function Home() {
     // const [posts, setPosts] = useState([])
@@ -13,7 +13,9 @@ function Home() {
     //         }
     //     })
     // },[])
-    const posts = useLoaderData();
+    var posts = []
+    posts = useLoaderData();
+    console.log(posts)
 
     if (posts.length === 0) {
         return (
@@ -33,7 +35,7 @@ function Home() {
         )
     }
     return(
-        <div className='w-full py-8'>
+        <div className='w-full lg:h-3/4 py-8'>
             <Container>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mx-4'>
                     {posts.map((post) => (
@@ -53,7 +55,8 @@ export const homeloader = async () => {
     try{
     const response = await appwriteService.getPosts()
     const posts = response.documents
-    return posts
+    if (posts) {
+    return posts}
     }catch(e){
         console.log(e)
         return []

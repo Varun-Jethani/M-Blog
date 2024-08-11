@@ -115,7 +115,7 @@ function Header() {
               </li>
             )}
           </ul>
-        <ul className={`flex flex-col w-full mt-4 space-y-2 sm:space-y-0 sm:flex-row sm:space-x-4 lg:hidden sm:items-center sm:mt-0 ${isNavOpen ? 'block' : 'hidden'}`}>
+        <ul className={`flex flex-col w-full mt-4 space-y-2 text-[#F7FFF7] sm:space-y-0 sm:flex-row sm:space-x-4 lg:hidden sm:items-center sm:mt-0 ${isNavOpen ? 'block' : 'hidden'}`}>
           {navItems.map((item) =>
           item.active ? (
             <li key={item.name}>
