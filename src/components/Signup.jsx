@@ -3,7 +3,7 @@ import authService from '../appwrite/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../store/authSlice'
 import { useDispatch } from 'react-redux'
-import { Button, Input, Logo } from './index'
+import { Button, Input, Loader, Logo } from './index'
 import { useForm } from 'react-hook-form'
 import { FaUser, FaLock } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
@@ -16,10 +16,12 @@ function Signup() {
     const navigate = useNavigate()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const create = async (data) => {
         setError("")
         try {
+            setLoading(true)
             const session = await authService.createAccount(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
@@ -29,11 +31,12 @@ function Signup() {
                 }
             }
         } catch (e) {
+            setLoading(false)
             setError(e.message)
         }
     }
 
-    return (
+    return loading? (<Loader/>) :(
         <div className='flex items-center justify-center'>
             <div className={`mx-auto w-full max-w-lg
                 p-10 border border-black/10 

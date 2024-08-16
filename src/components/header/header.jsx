@@ -8,15 +8,15 @@ import { useNavigate } from 'react-router-dom'
 
 function Header() {
     const authStatus = useSelector((state) => state.auth.status)
-    let userid = ''
-    try{userid = useSelector((state) => state.auth.userData.$id)
-    if (authStatus && !userid ) {
-      userid = useSelector((state) => state.auth.userData.userData.$id)
+    // let userid = ''
+    // try{userid = useSelector((state) => state.auth.userData.$id)
+    // if (authStatus && !userid ) {
+    //   userid = useSelector((state) => state.auth.userData.userData.$id)
 
-    }}catch(e){
-      console.log(e)
-      userid=''
-    }
+    // }}catch(e){
+    //   userid=''
+    // }
+    const userid = useSelector((state) => state.auth.userData?.$id || state.auth.userData?.userData?.$id || '')
     const navigate = useNavigate()
     const navItems = [
         {

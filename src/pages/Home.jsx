@@ -5,7 +5,7 @@ import { Link, useLoaderData } from 'react-router-dom'
 
 
 function Home() {
-    // const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     // useEffect(() => {
     //     appwriteService.getPosts([]).then((posts) => {
     //         if (posts) {
@@ -13,11 +13,19 @@ function Home() {
     //         }
     //     })
     // },[])
-    var posts = []
-    posts = useLoaderData();
-    console.log(posts)
+    const data = useLoaderData()
+    useEffect(() => {
+        console.log("here"+ data)
+        if (data && Array.isArray(data)) {
+            setPosts(data);
+        } else {
+            console.warn("Data is not an array or is undefined:", data);
+            setPosts(null);
+        }
+    }, [data])
+    console.log("Posts",posts)
 
-    if (posts.length === 0) {
+    if (!Array.isArray(posts) || posts.length === 0) {
         return (
             <div className='w-full py-8 h-full mt-4 text-center'>
                 <Container>
@@ -54,7 +62,7 @@ export default Home
 export const homeloader = async () => {
     try{
     const response = await appwriteService.getPosts()
-    const posts = response.documents
+    const posts = response?.documents || [];
     if (posts) {
     return posts}
     }catch(e){

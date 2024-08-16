@@ -12,6 +12,7 @@ import PostCard from './PostCard'
 import AuthLayout from './AuthLayout'
 import Button from './Button'
 import Input from './Input'
+import Loader from './loader/Loader'
 
 
 
@@ -31,5 +32,6 @@ export {
     AuthLayout,
     Button,
     Input,
+    Loader,
 
 }

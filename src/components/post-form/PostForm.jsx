@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { get, useForm } from 'react-hook-form'
 import {Button, Input, Select, RTE} from '../index'
 import appwriteService from '../../appwrite/config'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Loader from '../loader/Loader'
 
 
 
@@ -16,11 +17,14 @@ function PostForm({post}) {
             status: post?.status || 'active',
         } 
     })
+    const [isLoading, setIsLoading ] = useState(false)
     const navigate = useNavigate()
     const userData = useSelector(state => state.auth.userData)
     console.log(post)
 
     const submit = async (data) => {
+        try{
+        setIsLoading(true)
         if(post){
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
             if (file) {
@@ -44,6 +48,9 @@ function PostForm({post}) {
                     navigate(`/post/${dbpost.$id}`)
                 }
             }
+        }}catch(e){
+            console.error(e)
+            setIsLoading(false)
         }
     }
     const slugify = useCallback((title) => {
@@ -70,7 +77,7 @@ function PostForm({post}) {
        
     },[watch,slugify,setValue])
 
-    return (
+    return isLoading? (<Loader text='Posting'/>) :(
         <form onSubmit={handleSubmit(submit)} className='flex flex-col md:flex-row mt-3'>
             <div className='w-full md:w-2/3 px-2 space-y-3'>
                 <Input

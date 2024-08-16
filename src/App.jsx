@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import './App.css'
 import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
-import { Footer, Header } from './components'
+import { Footer, Header, Loader } from './components'
 import { Outlet } from 'react-router-dom'
 
 
@@ -34,10 +34,8 @@ function App() {
       </div>
 
     </div>
-  ) : <div>
-        <h1 className='text-black'>
-          Loading...
-        </h1>
+  ) : <div className="min-h-screen flex flex-wrap content-between bg-[#c5f8f0]">
+        <Loader text='Loading'/>
       </div>
   
 }
