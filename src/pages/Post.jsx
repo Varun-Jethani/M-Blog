@@ -75,5 +75,6 @@ export default function Post() {
 export const postInfoLoader = async ({params}) => {
     const { slug } = params;    
     const post = await appwriteService.getPost(slug);
+    post.slug = slug;
     return post;
 }
