@@ -91,7 +91,7 @@ export class Service {
 
     getFilePreview(fileId) {
         try {
-            return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+            return this.bucket.getFileView(conf.appwriteBucketId, fileId);
         } catch (error) {
             throw error;
         }
